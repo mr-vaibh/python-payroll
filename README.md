@@ -2,6 +2,10 @@
 ### Meenal, Aditya and Vaibhav ka CS Project 2021
 <br/>
 
+## Requirements
+1. `Python` - [http://python.org/download/](http://python.org/download/)
+2. `MySQL` - [https://dev.mysql.com/downloads/installer/](https://dev.mysql.com/downloads/installer/)
+
 ## Guide in case of ERROR
 
 
