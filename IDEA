@@ -1,0 +1,13 @@
+-> authentication
+
+-> company master
+-> department
+-> designation
+-> category
+
+
+-> emp => (code, name, father name, design, dept, category, doj, dob, sex, phone, email, salary)
+
+-> salary => (gross, basic, hra, conveyence)
+
+-> attedance => (in, out, days)
