@@ -31,15 +31,18 @@ def list_employees():
 	try:
 		cursor.execute("SELECT * FROM employees")
 		all_rows = cursor.fetchall()
-		table = tabulate(all_rows, headers=["Emp No", "Name", "Contact", "Gender", "Date Of Birth", "Designation", "Department", "Category", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"])
-		print(table)
-	except:
-		print("Encountered an ERROR")
+		if len(all_rows) == 0:
+			print("No employee record found")
+		else:
+			table = tabulate(all_rows, headers=["Emp No", "Name", "Gender", "DOB", "Designation", "Department", "Category", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"], tablefmt="fancy_grid")
+			print(table)
+	except Exception as e:
+		print("Encountered an ERROR:", e)
 
 
 def add_employee():
 	try:
-		print("---- Enter following information ----")
+		print("---- Enter following information (Ctrl+C to go back) ----")
 		name = str(input("Employee Name: "))
 		gender = str(input("Gender: ")).upper()
 		dob = str(input("Date of Birth [yyyy-mm-dd]: "))
@@ -55,14 +58,14 @@ def add_employee():
 
 		net_salary = float(gross - tax)
 
-		insert_query = f"INSERT INTO `employees` (name, contact, gender, dob, designation, department, category,basic, hra, conveyance, tax, gross, net_salary) VALUES ('{name}', '{contact}', '{gender}', '{dob}', '{designation}', '{department}', '{category}', '{basic}', '{hra}', '{conveyance}', '{tax}', '{gross}', '{net_salary}')"
+		insert_query = f"INSERT INTO `employees` (name, gender, dob, designation, department, category,basic, hra, conveyance, tax, gross, net_salary) VALUES ('{name}', '{gender}', '{dob}', '{designation}', '{department}', '{category}', '{basic}', '{hra}', '{conveyance}', '{tax}', '{gross}', '{net_salary}')"
 
 		cursor.execute(insert_query)
 		db.commit()
 
 		print("New Employee added successfully\n")
-	except:
-		print("Encountered an ERROR")
+	except Exception as e:
+		print("Encountered an ERROR", e)
 
 def search_employee():
 	cursor.execute("SELECT * FROM `employees`")
