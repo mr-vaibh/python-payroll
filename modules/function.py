@@ -27,6 +27,9 @@ def clear_terminal():
 
 
 def list_employees():
+	print("List of all employees\n")
+
+def add_employee():
 	name = str(input("Employee Name: "))
 	contact = str(input("Contact  [email/phone]: "))
 	gender = str(input("Gender: "))
@@ -35,12 +38,15 @@ def list_employees():
 	department = str(input("Department: "))
 	category = str(input("Category: "))
 	basic = float(input("Basic (salary): "))
-	hra = float(input("HRA: "))
-	conveyance = float(input("Conveyance: "))
-	bonus = float(input("Bonus: "))
-	print("List of all employees\n")
 
-def add_employee():
+	hra = basic*0.5
+	conveyance = basic*0.15
+	tax = basic*0.18
+	gross = basic + hra + conveyance
+
+	net_sal = gross - tax
+
+
 	print("Add an employee\n")
 
 def search_employee():

@@ -13,6 +13,6 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `basic` float DEFAULT NULL,
   `hra` float DEFAULT NULL,
   `conveyance` float DEFAULT NULL,
-  `bonus` float DEFAULT NULL,
+  `gross` float DEFAULT NULL,
   PRIMARY KEY (`emp_id`),
 )
