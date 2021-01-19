@@ -1,5 +1,4 @@
 from modules.login import __IS_LOGGEDIN
-from tabulate import tabulate
 from modules.function import *
 
 def main():

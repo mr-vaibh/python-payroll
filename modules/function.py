@@ -1,5 +1,6 @@
 from os import system, name
 from .conn import db, cursor
+from tabulate import tabulate
 
 def show_menu():
 	print(f'''{"*"*57}\n*\t\t Welcome to MRV Payroll \t\t*\n{"*"*57}\n
@@ -27,32 +28,41 @@ def clear_terminal():
 
 
 def list_employees():
-	print("List of all employees\n")
+	try:
+		cursor.execute("SELECT * FROM employees")
+		all_rows = cursor.fetchall()
+		table = tabulate(all_rows, headers=["Emp No", "Name", "Contact", "Gender", "Date Of Birth", "Designation", "Department", "Category", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"])
+		print(table)
+	except:
+		print("Encountered an ERROR")
+
 
 def add_employee():
-	print("---- Enter following information ----")
-	name = str(input("Employee Name: "))
-	contact = str(input("Contact  [email/phone]: ")).lower()
-	gender = str(input("Gender: ")).upper()
-	dob = str(input("Date of Birth [yyyy-mm-dd]: "))
-	designation = str(input("Designation: ")).upper()
-	department = str(input("Department: ")).upper()
-	category = str(input("Category: ")).upper()
-	basic = float(input("Basic (salary): "))
+	try:
+		print("---- Enter following information ----")
+		name = str(input("Employee Name: "))
+		gender = str(input("Gender: ")).upper()
+		dob = str(input("Date of Birth [yyyy-mm-dd]: "))
+		designation = str(input("Designation: "))
+		department = str(input("Department: "))
+		category = str(input("Category: ")).upper()
+		basic = float(input("Basic (salary): "))
 
-	hra = float(basic*0.5)
-	conveyance = float(basic*0.15)
-	tax = float(basic*0.18)
-	gross = float(basic + hra + conveyance)
+		hra = float(basic*0.5)
+		conveyance = float(basic*0.15)
+		tax = float(basic*0.18)
+		gross = float(basic + hra + conveyance)
 
-	net_salary = float(gross - tax)
+		net_salary = float(gross - tax)
 
-	insert_query = f"INSERT INTO `employees` (name, contact, gender, dob, designation, department, category,basic, hra, conveyance, tax, gross, net_salary) VALUES ('{name}', '{contact}', '{gender}', '{dob}', '{designation}', '{department}', '{category}', '{basic}', '{hra}', '{conveyance}', '{tax}', '{gross}', '{net_salary}')"
+		insert_query = f"INSERT INTO `employees` (name, contact, gender, dob, designation, department, category,basic, hra, conveyance, tax, gross, net_salary) VALUES ('{name}', '{contact}', '{gender}', '{dob}', '{designation}', '{department}', '{category}', '{basic}', '{hra}', '{conveyance}', '{tax}', '{gross}', '{net_salary}')"
 
-	cursor.execute(insert_query)
-	db.commit()
+		cursor.execute(insert_query)
+		db.commit()
 
-	print("New Employee added successfully\n")
+		print("New Employee added successfully\n")
+	except:
+		print("Encountered an ERROR")
 
 def search_employee():
 	cursor.execute("SELECT * FROM `employees`")

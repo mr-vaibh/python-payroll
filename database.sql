@@ -4,7 +4,6 @@ USE `mrv_payroll`;
 CREATE TABLE IF NOT EXISTS `employees` (
   `emp_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `contact` varchar(100) DEFAULT NULL,
   `gender` varchar(10) DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `designation` varchar(100) DEFAULT NULL,
