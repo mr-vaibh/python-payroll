@@ -47,7 +47,7 @@ def add_employee():
 
 	net_salary = float(gross - tax)
 
-	insert_query = f'''INSERT INTO `employees` (name, contact, gender, dob, designation, department, category,basic, hra, conveyance, tax, gross, net_salary) VALUES ('{name}', '{contact}', '{gender}', '{dob}', '{designation}', '{department}', '{category}', '{basic}', '{hra}', '{conveyance}', '{tax}', '{gross}', '{net_salary}')'''
+	insert_query = f"INSERT INTO `employees` (name, contact, gender, dob, designation, department, category,basic, hra, conveyance, tax, gross, net_salary) VALUES ('{name}', '{contact}', '{gender}', '{dob}', '{designation}', '{department}', '{category}', '{basic}', '{hra}', '{conveyance}', '{tax}', '{gross}', '{net_salary}')"
 
 	cursor.execute(insert_query)
 	db.commit()
