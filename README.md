@@ -12,5 +12,5 @@
 2. type `pip install -r requirements.txt`
 3. GOTO `modules/function.py` and change `user` and `password` to your local credentials.
 
->> Vaibhav Shukla<br>
->> [mrvaibh0@gmail.com](mailto:mrvaibh0@gmail.com)
+> Vaibhav Shukla<br>
+> [mrvaibh0@gmail.com](mailto:mrvaibh0@gmail.com)
