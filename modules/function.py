@@ -65,7 +65,7 @@ def add_employee():
 
 		print("New Employee added successfully\n")
 	except Exception as e:
-		print("Encountered an ERROR", e)
+		print("Encountered an ERROR:", e)
 
 def search_employee():
 	cursor.execute("SELECT * FROM `employees`")
