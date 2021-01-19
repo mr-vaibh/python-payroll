@@ -36,8 +36,9 @@ def list_employees():
 		else:
 			table = tabulate(all_rows, headers=["Emp No", "Name", "Gender", "DOB", "Designation", "Department", "Category", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"], tablefmt="fancy_grid")
 			print(table)
+			print(f"{cursor.rowcount} employee record(s) found")
 	except Exception as e:
-		print("Encountered an ERROR:", e)
+		print("Encountered an ERROR:", e, "\n")
 
 
 def add_employee():
@@ -63,27 +64,58 @@ def add_employee():
 		cursor.execute(insert_query)
 		db.commit()
 
-		print("New Employee added successfully\n")
+		print("New Employee ADDED successfully\n")
+	except Exception as e:
+		print("Encountered an ERROR:", e, "\n")
+
+
+def search_employee():
+	try:
+		emp_id = int(input("Enter Employee ID: "))
+		cursor.execute(f"SELECT * FROM `employees` WHERE id='{emp_id}' ")
+		all_rows = cursor.fetchall()
+		if len(all_rows) == 0:
+			print("No employee record found")
+		else:
+			table = tabulate(all_rows, headers=["Emp No", "Name", "Gender", "DOB", "Designation", "Department", "Category", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"], tablefmt="fancy_grid")
+			print(table)
 	except Exception as e:
 		print("Encountered an ERROR:", e)
 
-def search_employee():
-	cursor.execute("SELECT * FROM `employees`")
 
 def edit_employee():
 	print("Edit an employee\n")
 
+
 def delete_employee():
-	print("Delete an employee\n")
+	try:
+		emp_id = int(input("Enter Employee ID: "))
+
+		cursor.execute(f"DELETE FROM `employees` WHERE id={emp_id}")
+		db.commit()
+
+		print("Employee DELETED successfully\n")
+	except Exception as e:
+		print("Encountered an ERROR:", e, "\n")
+
 
 def delete_all_employees():
-	print("Delete all the employees\n")
+	try:
+		cursor.execute(f"DELETE FROM `employees`")
+		db.commit()
+
+		print("All employee record DELETED successfully\n")
+	except Exception as e:
+		print("Encountered an ERROR:", e, "\n")
+
 
 def payroll_master():
 	print("Payroll Master\n")
 
+
 def payslip_all():
 	print("Payslip of all employees\n")
+
 
 def payslip_one():
 	print("Payslip of one employee")
