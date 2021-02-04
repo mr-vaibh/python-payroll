@@ -1,4 +1,5 @@
 from os import system, name
+import datetime
 from .conn import db, cursor
 from tabulate import tabulate
 
@@ -169,7 +170,29 @@ def delete_all_employees():
 
 
 def payroll_master():
-	print("Payroll Master\n")
+	# try:
+	# 	cursor.execute("SELECT * FROM employees")
+	# 	all_rows = cursor.fetchall()
+	# 	print("\n\n\n" + 95 * "*" + "\nEmployee Payroll".center(90) + "\n" + 95 * "*")
+	# 	print("Date and Time: ", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+	# 	print(95 * "-")
+	# 	print('%-5s %-15s %-10s %-4s %-8s %-15s %-10s %-8s %-6s %-8s %-8s %-8s %-9s' \
+	# 		%("Emp No", "Name", "Gender", "DOB", "Designation", "Department", "Category", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"))
+	# 	print(95 * "-")
+	# 	for row in all_rows:
+	# 		print('%-4d %-15s %-10s %-4.2f %-8.2f %-8.2f %-10.2f %-8.2f %-6.2f %-8.2f %-9.2f %-8.2f %-9.2f'%row)
+	# 	print(95 * "-" + "\n")
+	# except Exception as e:
+	# 	print("Encountered an ERROR:", e, "\n")
+	cursor.execute("SELECT * FROM employees")
+	all_rows = cursor.fetchall()
+	print("\n\n" + 95 * "*" + "\n\t\t\t\t Payroll Master".center(90) + "\n" + 95 * "*")
+	print("Date and Time: ", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+	print(95 * "-")
+	
+	table = tabulate(all_rows, headers=["Emp No", "Name", "Gender", "DOB", "Designation", "Department", "Category", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"])
+	print(table)
+	print(95 * "-" + "\n")
 
 
 def payslip_all():
