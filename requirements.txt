@@ -1,2 +1,4 @@
 mysql-connector-python==8.0.23
+protobuf==3.14.0
+six==1.15.0
 tabulate==0.8.7
