@@ -143,7 +143,7 @@ def edit_employee():
 			db.commit()
 			print("Employee successfully modified")
 
-			if input("Do you want to modify more in this record? (y/n)") != "y":
+			if input("Do you want to modify more in this record? (y/n): ") != "y":
 				break
 
 
@@ -170,34 +170,46 @@ def delete_all_employees():
 
 
 def payroll_master():
-	# try:
-	# 	cursor.execute("SELECT * FROM employees")
-	# 	all_rows = cursor.fetchall()
-	# 	print("\n\n\n" + 95 * "*" + "\nEmployee Payroll".center(90) + "\n" + 95 * "*")
-	# 	print("Date and Time: ", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-	# 	print(95 * "-")
-	# 	print('%-5s %-15s %-10s %-4s %-8s %-15s %-10s %-8s %-6s %-8s %-8s %-8s %-9s' \
-	# 		%("Emp No", "Name", "Gender", "DOB", "Designation", "Department", "Category", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"))
-	# 	print(95 * "-")
-	# 	for row in all_rows:
-	# 		print('%-4d %-15s %-10s %-4.2f %-8.2f %-8.2f %-10.2f %-8.2f %-6.2f %-8.2f %-9.2f %-8.2f %-9.2f'%row)
-	# 	print(95 * "-" + "\n")
-	# except Exception as e:
-	# 	print("Encountered an ERROR:", e, "\n")
-	cursor.execute("SELECT * FROM employees")
-	all_rows = cursor.fetchall()
-	print("\n\n" + 95 * "*" + "\n\t\t\t\t Payroll Master".center(90) + "\n" + 95 * "*")
-	print("Date and Time: ", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-	print(95 * "-")
-	
-	table = tabulate(all_rows, headers=["Emp No", "Name", "Gender", "DOB", "Designation", "Department", "Category", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"])
-	print(table)
-	print(95 * "-" + "\n")
+	try:
+		cursor.execute("SELECT * FROM employees")
+		all_rows = cursor.fetchall()
+		print("\n\n" + 148 * "*" + "\n\t\t\t\t\t\t\t\t Payroll Master" + "\n" + 148 * "*")
+		print("Date and Time: ", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+		print(148 * "-")
+		
+		table = tabulate(all_rows, headers=["Emp No", "Name", "Gender", "DOB", "Designation", "Department", "Category", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"])
+		print(table)
+		print(148 * "-" + "\n")
+	except Exception as e:
+		print("Encountered an ERROR:", e, "\n")
 
 
 def payslip_all():
-	print("Payslip of all employees\n")
+	try:
+		cursor.execute("SELECT emp_id, name, designation, basic, hra, conveyance, tax, gross, net_salary FROM employees")
+		all_rows = cursor.fetchall()
+		print("\n\n" + 100 * "*" + "\n\t\t\t\t  Payslip (ALL EMPLOYEES)" + "\n" + 100 * "*")
+		print("Date and Time: ", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+		print(100 * "-")
+		
+		table = tabulate(all_rows, headers=["Emp No", "Name", "Designation", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"])
+		print(table)
+		print(100 * "-" + "\n")
+	except Exception as e:
+		print("Encountered an ERROR:", e, "\n")
 
 
 def payslip_one():
-	print("Payslip of one employee")
+	try:
+		emp_id = int(input("Enter Employee ID: "))
+		cursor.execute(f"SELECT emp_id, name, designation, basic, hra, conveyance, tax, gross, net_salary FROM employees WHERE emp_id={emp_id}")
+		emp_record = cursor.fetchone()
+		print("\n\n" + 100 * "*" + "\n\t\t\t\t  Payslip (ALL EMPLOYEES)" + "\n" + 100 * "*")
+		print("Date and Time: ", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+		print(100 * "-")
+		
+		table = tabulate([emp_record], headers=["Emp No", "Name", "Designation", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"])
+		print(table)
+		print(100 * "-" + "\n")
+	except Exception as e:
+		print("Encountered an ERROR:", e, "\n")
