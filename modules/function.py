@@ -32,7 +32,7 @@ def list_employees():
 		cursor.execute("SELECT * FROM employees")
 		all_rows = cursor.fetchall()
 		if len(all_rows) == 0:
-			print("No employee record found")
+			print("No employee record found\n")
 		else:
 			table = tabulate(all_rows, headers=["Emp No", "Name", "Gender", "DOB", "Designation", "Department", "Category", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"], tablefmt="fancy_grid")
 			print(table)
@@ -72,7 +72,7 @@ def add_employee():
 def search_employee():
 	try:
 		emp_id = int(input("Enter Employee ID: "))
-		cursor.execute(f"SELECT * FROM `employees` WHERE id='{emp_id}' ")
+		cursor.execute(f"SELECT * FROM `employees` WHERE emp_id='{emp_id}' ")
 		all_rows = cursor.fetchall()
 		if len(all_rows) == 0:
 			print("No employee record found")
@@ -84,14 +84,73 @@ def search_employee():
 
 
 def edit_employee():
-	print("Edit an employee\n")
+	emp_id = int(input("Enter Employee ID: "))
+	cursor.execute(f"SELECT * FROM `employees` WHERE emp_id='{emp_id}' ")
+	emp_record = cursor.fetchone()
+	if cursor.rowcount < 0:
+		print("Employee does not exist")
+	else:
+		table = tabulate([emp_record], headers=["Emp No", "Name", "Gender", "DOB", "Designation", "Department", "Category", "Basic", "HRA", "Conveyance", "Tax", "Gross", "Net Salary"], tablefmt="fancy_grid")
+		print(table)
+		print("\n\t\t1->Name    4->Designation  7->Basic       10->Tax\n\
+\t\t2->Gender  5->Department   8->HRA         11->Gross\n\
+\t\t3->DOB     6->Category     9->Conveyance  12->Net Salary" )
+		while True:
+			to_modify = int(input("Which field is to modify? [1-12] :"))
+			if to_modify == 1:
+				field_to_be_modified = "name"
+				modified_value = str(input("Enter new Name: "))
+			elif to_modify == 2:
+				field_to_be_modified = "gender"
+				modified_value = str(input("Enter new Gender: ")).upper()
+			elif to_modify == 3:
+				field_to_be_modified = "dob"
+				modified_value = str(input("Enter new DOB [yyyy-mm-dd]: "))
+			elif to_modify == 4:
+				field_to_be_modified = "designation"
+				modified_value = str(input("Enter new Designation: "))
+			elif to_modify == 5:
+				field_to_be_modified = "department"
+				modified_value = str(input("Enter new Department: "))
+			elif to_modify == 6:
+				field_to_be_modified = "category"
+				modified_value = str(input("Enter new Category: ")).upper()
+			elif to_modify == 7:
+				field_to_be_modified = "basic"
+				modified_value = int(input("Enter new Basic: "))
+			elif to_modify == 8:
+				field_to_be_modified = "hra"
+				modified_value = int(input("Enter new HRA: "))
+			elif to_modify == 9:
+				field_to_be_modified = "conveyance"
+				modified_value = int(input("Enter new Conveyance: "))
+			elif to_modify == 10:
+				field_to_be_modified = "tax"
+				modified_value = int(input("Enter new Tax: "))
+			elif to_modify == 11:
+				field_to_be_modified = "gross"
+				modified_value = int(input("Enter new Gross: "))
+			elif to_modify == 12:
+				field_to_be_modified = "net_salary"
+				modified_value = int(input("Enter new Net Salary: "))
+			
+			if isinstance(modified_value, str):
+				cursor.execute(f"UPDATE employees SET {field_to_be_modified} = '{modified_value}' WHERE emp_id={emp_id}")
+			elif isinstance(modified_value, int):
+				cursor.execute(f"UPDATE employees SET {field_to_be_modified} = {modified_value} WHERE emp_id={emp_id}")
+				 
+			db.commit()
+			print("Employee successfully modified")
+
+			if input("Do you want to modify more in this record? (y/n)") != "y":
+				break
 
 
 def delete_employee():
 	try:
 		emp_id = int(input("Enter Employee ID: "))
 
-		cursor.execute(f"DELETE FROM `employees` WHERE id={emp_id}")
+		cursor.execute(f"DELETE FROM `employees` WHERE emp_id={emp_id}")
 		db.commit()
 
 		print("Employee DELETED successfully\n")
