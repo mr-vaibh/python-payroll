@@ -6,7 +6,7 @@ while True:
 	username = str(input("Enter username: "))
 	password = str(input("Enter password: "))
 
-	if username == "" and password == "":
+	if username == "admin" and password == "admin1183":
 		__IS_LOGGEDIN = True
 		clear_terminal()
 		break
