@@ -1,0 +1,8 @@
+// this file is for program 9-number_of_words.py
+
+hi my name is Vaibhav Shukla, 
+This is a test file for my 12th standard CS Practical file
+
+I am GENIUS
+
+Visit my website vaibhavshukla.ml
