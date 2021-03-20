@@ -20,13 +20,13 @@ print(cursor.rowcount, "record inserted.")
 
 # Inserting many values
 val = [
-  ('Aditya', 'Dwarka 21'),
-  ('Manas', 'Dwarka 23'),
-  ('Akhil', 'Samalka'),
-  ('Saurav', 'Bharthal'),
-  ('Sahil', 'Somewhere'),
-  ('RunningOutOfNames', 'Mind'),
-  ('God', 'Everywhere')
+	('Aditya', 'Dwarka 21'),
+	('Manas', 'Dwarka 23'),
+	('Akhil', 'Samalka'),
+	('Saurav', 'Bharthal'),
+	('Sahil', 'Somewhere'),
+	('RunningOutOfNames', 'Mind'),
+	('God', 'Everywhere')
 ]
 
 cursor.executemany(sql, val)
