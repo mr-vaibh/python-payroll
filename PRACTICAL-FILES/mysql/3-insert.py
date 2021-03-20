@@ -35,7 +35,7 @@ print(cursor.rowcount, "records inserted.")
 
 
 # UPDATE
-sql = "UPDATE customers SET address = 'Dwarka Sec-' WHERE address = 'Dwarka%a'"
+sql = "UPDATE customers SET address = 'Dwarka' WHERE address LIKE 'Dwarka%'"
 cursor.execute(sql)
 db.commit()
 
