@@ -9,7 +9,7 @@ db = conn.connect(
 cursor = db.cursor()
 
 sql = "INSERT INTO customers (name, address) VALUES (%s, %s)"
-val = ("John", "Highway 21")
+val = ("Vaibhav", "Dwarka 23B")
 cursor.execute(sql, val)
 
 # This commit method tells to SAVE the row in DB
@@ -20,12 +20,13 @@ print(cursor.rowcount, "record inserted.")
 
 # Inserting many values
 val = [
-  ('Peter', 'Lowstreet 4'),
-  ('Susan', 'One way 98'),
-  ('Vicky', 'Yellow Garden 2'),
-  ('Ben', 'Park Lane 38'),
-  ('William', 'Central st 954'),
-  ('Viola', 'Sideway 1633')
+  ('Aditya', 'Dwarka 21'),
+  ('Manas', 'Dwarka 23'),
+  ('Akhil', 'Samalka'),
+  ('Saurav', 'Bharthal'),
+  ('Sahil', 'Somewhere'),
+  ('RunningOutOfNames', 'Mind'),
+  ('God', 'Everywhere')
 ]
 
 cursor.executemany(sql, val)
@@ -34,7 +35,7 @@ print(cursor.rowcount, "records inserted.")
 
 
 # UPDATE
-sql = "UPDATE customers SET address = 'Canyon 123' WHERE address = 'Park Lane 38'"
+sql = "UPDATE customers SET address = 'Dwarka Sec-' WHERE address = 'Dwarka%a'"
 cursor.execute(sql)
 db.commit()
 
