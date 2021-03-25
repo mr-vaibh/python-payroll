@@ -27,6 +27,7 @@ def main():
 			payslip_one()
 		elif choice == "c":
 			clear_terminal()
+			show_menu()
 		elif choice == "m":
 			show_menu()
 		elif choice == "q":
