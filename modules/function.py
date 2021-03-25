@@ -44,28 +44,31 @@ def list_employees():
 
 def add_employee():
 	try:
-		print("---- Enter following information (Ctrl+C to go back) ----")
-		name = str(input("Employee Name: "))
-		gender = str(input("Gender: ")).upper()
-		dob = str(input("Date of Birth [yyyy-mm-dd]: "))
-		designation = str(input("Designation: "))
-		department = str(input("Department: "))
-		category = str(input("Category: ")).upper()
-		basic = float(input("Basic (salary): "))
+		try:
+			print("---- Enter following information (Ctrl+C to go back) ----")
+			name = str(input("Employee Name: "))
+			gender = str(input("Gender: ")).upper()
+			dob = str(input("Date of Birth [yyyy-mm-dd]: "))
+			designation = str(input("Designation: "))
+			department = str(input("Department: "))
+			category = str(input("Category: ")).upper()
+			basic = float(input("Basic (salary): "))
 
-		hra = float(basic*0.5)
-		conveyance = float(basic*0.15)
-		tax = float(basic*0.18)
-		gross = float(basic + hra + conveyance)
+			hra = float(basic*0.5)
+			conveyance = float(basic*0.15)
+			tax = float(basic*0.18)
+			gross = float(basic + hra + conveyance)
 
-		net_salary = float(gross - tax)
+			net_salary = float(gross - tax)
 
-		insert_query = f"INSERT INTO `employees` (name, gender, dob, designation, department, category,basic, hra, conveyance, tax, gross, net_salary) VALUES ('{name}', '{gender}', '{dob}', '{designation}', '{department}', '{category}', '{basic}', '{hra}', '{conveyance}', '{tax}', '{gross}', '{net_salary}')"
+			insert_query = f"INSERT INTO `employees` (name, gender, dob, designation, department, category,basic, hra, conveyance, tax, gross, net_salary) VALUES ('{name}', '{gender}', '{dob}', '{designation}', '{department}', '{category}', '{basic}', '{hra}', '{conveyance}', '{tax}', '{gross}', '{net_salary}')"
 
-		cursor.execute(insert_query)
-		db.commit()
+			cursor.execute(insert_query)
+			db.commit()
 
-		print("New Employee ADDED successfully\n")
+			print("New Employee ADDED successfully\n")
+		except KeyboardInterrupt:
+			print('\n')
 	except Exception as e:
 		print("Encountered an ERROR:", e, "\n")
 
