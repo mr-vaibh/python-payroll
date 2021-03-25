@@ -1,10 +1,10 @@
 import mysql.connector
 
 db = mysql.connector.connect(
-    host="localhost",
-    user="yourusername",
-    password="yourpassword",
-    database="mydatabase"
+	host="localhost",
+	user="root",
+	password="root123",
+	database="good_database"
 )
 
 cursor = db.cursor()
@@ -16,11 +16,12 @@ cursor.execute("SELECT name, address FROM customers")
 record = cursor.fetchall()
 
 for row in record:
-    print(row)
+	print(row)
 
+print('\n')
 
 # WHERE clause
-query = "SELECT * FROM customers WHERE address ='Central st 954'"
+query = "SELECT * FROM customers WHERE address ='Dwarka'"
 cursor.execute(query)
 record = cursor.fetchall()
 
