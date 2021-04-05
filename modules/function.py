@@ -207,7 +207,7 @@ def payslip_one():
 		emp_id = int(input("Enter Employee ID: "))
 		cursor.execute(f"SELECT emp_id, name, designation, basic, hra, conveyance, tax, gross, net_salary FROM employees WHERE emp_id={emp_id}")
 		emp_record = cursor.fetchone()
-		print("\n\n" + 100 * "*" + "\n\t\t\t\t  Payslip (ALL EMPLOYEES)" + "\n" + 100 * "*")
+		print("\n\n" + 100 * "*" + "\n\t\t\t\t  Payslip" + "\n" + 100 * "*")
 		print("Date and Time: ", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 		print(100 * "-")
 		
